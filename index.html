@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./chart-js/dist/chart.min.js"></script> 
+    <script src="./chartjs-plugin-datalabels/chartjs-plugin-datalabels.min.js"></script> 
+    <title>Pie Chart</title>
+    <style>
+        body{
+            background-color: #D3D3D3;
+        }
+        div{
+            /* for this page only :) */
+            position: absolute;
+            top:50%;
+            left:50%;
+            margin-top: -200px;
+            margin-left: -200px;
+            height: 400px;
+            width: 400px;
+        }
+    </style>
+</head>
+<body>
+        <div>
+            <canvas id="myChart"></canvas>
+        </div>
+    <script>
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ["A","B","C","D","E","F","G"],
+                datasets: [{
+                    data: [10, 15, 25, 10, 10, 20 ,10],
+                    backgroundColor: [
+                        "#FFCE56",
+                        "#36A2EB",
+                        "#FF6384",
+                        "#FFCE56",
+                        "#36A2EB",
+                        "#FF6384",
+                        "#36A2EB"
+
+                    ],
+                    hoverBackgroundColor: [
+                        "#EEBD47",
+                        "#2591DA",
+                        "#EE5273",
+                        "#EEBD47",
+                        "#2591DA",
+                        "#EE5273",
+                        "#2591DA"
+                    ],
+                    borderColor: "#fff",
+                    offset: [150, 100, 30, 30, 30, 30 ,100],        
+            }]
+            },
+            plugins: [ChartDataLabels],
+            options: {
+                responsive: true,
+                rotation: -19,
+                plugins: {
+                    legend: false,
+                    tooltip: false,
+                    datalabels: {
+                        color: '#fff',
+                        anchor: "end",
+                        align: "end",
+                        offset: -30,
+                        formatter: function(value, context) {
+                            return context.chart.data.labels[context.dataIndex];
+                        },
+                        font: {
+                            size: 18,
+                            weight: "bold"
+                        }
+                    }
+                },
+                elements: {
+                }
+            }
+        });
+    </script>
+</body>
+</html>
